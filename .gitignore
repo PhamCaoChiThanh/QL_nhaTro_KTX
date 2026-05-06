@@ -1,0 +1,37 @@
+# ─── Build outputs ────────────────────────────────────────────
+bin/
+obj/
+
+# ─── Database files (SQLite) ──────────────────────────────────
+*.db
+*.db-shm
+*.db-wal
+
+# ─── Sensitive config (KHÔNG commit lên git) ──────────────────
+appsettings.Development.json
+**/Services/.env
+**/Services/.env.*
+!.env.example
+!**/Services/.env.example
+.env
+.env.*
+
+# ─── Logs ────────────────────────────────────────────────────
+Logs/
+*.log
+
+# ─── Visual Studio / Rider ───────────────────────────────────
+.vs/
+.idea/
+*.user
+*.suo
+
+# ─── Node (frontend) ─────────────────────────────────────────
+node_modules/
+
+# ─── Vite build output ───────────────────────────────────────
+frontend/dist/
+
+# ─── OS ──────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

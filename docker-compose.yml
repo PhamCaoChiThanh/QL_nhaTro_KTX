@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # ─── DATABASE: SQL Server ───────────────────────────────────
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql_server_container
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong@Password123
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+
+  # ─── BACKEND: Web API (.NET 10) ──────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend_container
+    ports:
+      - "5000:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=database;Database=QL_nhaTro_KTX_DB;User Id=sa;Password=YourStrong@Password123;TrustServerCertificate=True;
+      - Jwt__Key=ThisIsASecretKeyForJwtAuthenticationInQLNhaTroKTX12345!@#
+      - Jwt__Issuer=QL_nhaTro_KTX_Issuer
+      - Jwt__Audience=QL_nhaTro_KTX_Audience
+    volumes:
+      - ./backend/.env:/app/.env
+    depends_on:
+      - database
+
+  # ─── FRONTEND: Client SPA ───────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_container
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  sql_data:

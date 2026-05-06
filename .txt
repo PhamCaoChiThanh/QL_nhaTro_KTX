@@ -1,0 +1,20 @@
+npm run dev
+dotnet build
+dotnet run
+
+
+
+trên thang điểm 10 thì project được mấy điểm, hãy nêu ra những điểm mạnh, điểm yếu và hướng phát triển cũng như những chức năng khác đi
+
+
+chạy docker
+docker-compose up --build -d
+
+
+Trường hợp 1: Bạn muốn chạy toàn bộ trên Docker (Khuyên dùng) Bạn không cần chạy lệnh dotnet run hay npm run dev nữa. Hãy truy cập trực tiếp:
+
+Frontend: http://localhost:3000
+Backend / Swagger: http://localhost:5000/swagger
+
+Trường hợp 2: Bạn muốn tắt Docker để code & test ở máy thật (Local)
+docker-compose down
